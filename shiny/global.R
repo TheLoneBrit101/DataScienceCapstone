@@ -6,20 +6,21 @@ library(markdown)
 library(wordcloud)
 library(shiny)
 
-
-t1gram <- readRDS('data/t1gram.RDS')
+## t1gram <- readRDS('data/t1gram.RDS')
+t1gram <- readRDS('data/t1gramCut.RDS')
 t2gram <- readRDS('data/t2gram.RDS')
 t3gram <- readRDS('data/t3gram.RDS')
 t4gram <- readRDS('data/t4gramT.RDS')
 t5gram <- readRDS('data/t5gram.RDS')
 
-setorder(t1gram,-freq)
+## setorder(t1gram,-freq)
 setorder(t2gram,-score)
 setorder(t3gram,-score)
 setorder(t4gram,-score)
 setorder(t5gram,-score)
 
-t1gramCut <- head(t1gram)
+## t1gramCut <- head(t1gram)
+## saveRDS(t1gramCut,'shiny/data/t1gramCut.RDS')
 
 # profwords <- n.readLines("base-list-of-bad-words_text-file_2018_07_30.txt",
 #                          n =76, skip = 12)
@@ -91,8 +92,8 @@ word_predict <- function(input) {
             }
         }
         if (length(w)==0){
-            w <- c(w,t1gramCut$term)
-            sc <- c(sc,t1gramCut$freq)
+            w <- c(w,t1gram$term)
+            sc <- c(sc,t1gram$freq)
         }
     
     result <- data.table(word=w,score=sc)
